@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+  
+    input{
+      border:none;
+      border-bottom: 2px solid #D27685;
+    }
+    body{
+      background-color:#A2CDB0;
+    }
+    label{
+      color:white;
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      font-weight: 15px;
+      font-size: 20px;
+    } 
+  .box{
+     
+      margin:150px 550px;
+      padding-top:50px;
+      padding-right:30px; 
+      padding-left:30px; 
+      width:300px;
+      height:300px;
+      border:2px solid;
+      text-align:center;
+      border-radius:15px;
+      background-color: #F1C27B;
+    }
+    .t{
+   
+      padding-bottom:30px;
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      font-weight: 15px;
+      font-size: 12px;
+      color:white;
+    }
+    select{
+     
+      
+      appearance: none;
+      outline: none;
+      width:100px;
+      height:30px;
+      text-align: center;
+      border-color:#D27685;
+      border-radius:10px;
+      color:black;
+      
+    }
+    button{
+      border-color:#D27685;
+      color:black;
+      border-radius:5px;
+      
+    }
+  </style>
+</head>
+<body>
+ 
+<div class="box">
+  <div class="t">
+  <h1 style="text-align:center;">Temperature converter</h1></div>
+  
+  <select id="input" style="margin-right:60px;width:100px;" >
+    <option value="" disabled selected hidden>From</option>
+    <option>Celsius</option>
+    <option>Kelvin</option>
+    <option>Farenheit</option>
+ 
+  </select>
+  <select id="output" name="temp">
+    <option value="" disabled selected hidden>To</option>
+    <option>Celsius</option>
+    <option>Kelvin</option>
+    <option>Farenheit</option>
+  </select>
+<br></br>
+
+<label>Value</label>
+<input type="text" id="value"></input>
+<br>
+<span id="numberText"></span>
+<br><br>
+<button onclick="myFunction()">Convert</button>
+<br><br>
+<label>Result</label>
+<input  id="demo"></input>
+
+
+</div>
+
+<script>
+function myFunction() {
+  let r;
+  let s;
+  let x= document.getElementById("demo");
+let y = document.getElementById("input").value;
+var l = document.getElementById("output").value;
+var i =parseFloat(document.getElementById("value").value);
+s=validate(i);
+if (s === false){
+  return false;
+}
+else{
+if(y=="Celsius" && l=="Kelvin"){
+   r=celtokel(i);}
+else if(y=="Celsius" && l=="Farenheit"){
+   r=celtofar(i);} 
+else if (y=="Kelvin" && l=="Celsius"){
+    r = keltocel(i);} 
+else if (y=="Kelvin" && l=="Farenheit"){
+    r = keltofar(i);} 
+else if(y=="Farenheit" && l=="Kelvin"){
+     r=fartokel(i);}  
+else if(y=="Farenheit" && l=="Celsius"){
+     r=fartocel(i);} 
+else{
+  r=i;
+}
+
+if(!Number.isInteger(r)){
+  
+  r=r.toFixed(2);
+}
+if(l=="Celsius"){
+  x.value=" " + r +" °C";  
+
+}
+else if (l=="Kelvin"){
+  x.value=" " + r +" K";
+}
+else{
+  x.value=" " + r +" °F";
+}
+
+ 
+
+  
+}
+}
+
+
+function validate(i){
+  if (isNaN(i)) {
+                document.getElementById("numberText")
+                    .innerHTML = "Invalid input";
+                    return false;
+             
+}
+else{document.getElementById("numberText")
+                    .innerHTML = "";
+                    return true;
+              
+}
+}
+function celtokel(i){
+  let k=i+273.15;
+  return k;
+}
+function celtofar(i){
+  let k=(i*1.8)+32;
+  return k;
+}
+function keltocel(i){
+  let k = i-273.15;
+  return k;
+}
+function keltofar(i){
+  let k = ((i-273.15)*1.8)+32;
+  return k;
+}
+function fartocel(i){
+  let k = ((i-32)*5)/9;
+  return k;
+}
+function fartokel(i){
+  let k = (i-32)*(5/9)+273.15;
+  return k;
+}
+</script>
+
+</body>
+</html>
+
